@@ -36,13 +36,15 @@
             ConnectionString="name=AdventureWorksLT_DataEntities"
             DefaultContainerName="AdventureWorksLT_DataEntities" EnableDelete="true"
             EnableFlattening="false" EnableInsert="true" EnableUpdate="true"
-            OrderBy="it.[FirstName]"
-            EntitySetName="Customers"  Where="it.[SalesPerson]==@SalesPerson">
-                <WhereParameters>
-                    <asp:ControlParameter Name="SalesPerson"
-                        ControlID="SalesPersonDropDownList" Type="String" DefaultValue="NULL" />
-                </WhereParameters>
+            EntitySetName="Customers" >
         </asp:EntityDataSource>
+
+        <asp:QueryExtender ID="CustomersQueryExtender" runat="server" TargetControlID="CustomerEntityDataSource">
+            <asp:PropertyExpression>
+                <asp:ControlParameter ControlID="SalesPersonDropDownList" Name="SalesPerson" />
+            </asp:PropertyExpression>
+            <asp:OrderByExpression DataField="Lastname" Direction="Descending" />
+        </asp:QueryExtender>
     
     </div>
     </form>
